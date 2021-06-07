@@ -1,3 +1,4 @@
 requests
 smtplib
 datetime
+APScheduler==3.7.0

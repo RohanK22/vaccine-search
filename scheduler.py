@@ -17,7 +17,7 @@ def alert(vaccineInfo):
     mailServer.quit()
     print("Mailed available vaccine info!")
 
-if __name__ == "__main__":
+def cronjob():
     dateToday = datetime.datetime.now()
     dateStr = str(dateToday.day) + '-' + str(dateToday.month) + '-' + str(dateToday.year)  
     response = requests.get(api_endpoint_manipal + dateStr)
@@ -57,3 +57,8 @@ if __name__ == "__main__":
                 print(name, vaccine, date, age, sep=' - ')
                 msgStr = name + " - " + vaccine + " - " + date
                 alert(msgStr)
+
+
+
+if __name__ == "__main__":
+    cronjob()
