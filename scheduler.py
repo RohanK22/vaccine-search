@@ -9,7 +9,7 @@ gmailaddress = "rohan.kumar.smtp@gmail.com"
 gmailpassword = "Maryhadalittlelamb"
 proxies = {
  "http": "http://49.248.152.247:80",
- "https": "http://103.209.88.68:8080",
+ "https": "http://14.140.131.82:3128",
 }
 
 def alert(vaccineInfo):
