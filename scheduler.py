@@ -22,41 +22,40 @@ def cronjob():
     dateStr = str(dateToday.day) + '-' + str(dateToday.month) + '-' + str(dateToday.year)  
     response = requests.get(api_endpoint_manipal + dateStr)
     json = response.json()
-    
+    print(json)
+    if json:
+        centers = json["centers"]
+        for center in centers:
+            sessions = center["sessions"]
+            name = center["name"]
+            for session in sessions:
+                if session["available_capacity"] != 0:
+                    vaccine = session["vaccine"]
+                    date = session["date"]
+                    age = session["min_age_limit"]
+                    print(name, vaccine, date, age, sep=' - ')
+                    msgStr = name + " - " + vaccine + " - " + date
+                    alert(msgStr)
 
-    centers = json["centers"]
+        dateToday = datetime.datetime.now()
+        dateStr = str(dateToday.day) + '-' + str(dateToday.month) + '-' + str(dateToday.year)  
+        response = requests.get(api_endpoint_kundapur + dateStr)
+        json = response.json()
+        
 
-    for center in centers:
-        sessions = center["sessions"]
-        name = center["name"]
-        for session in sessions:
-            if session["available_capacity"] != 0:
-                vaccine = session["vaccine"]
-                date = session["date"]
-                age = session["min_age_limit"]
-                print(name, vaccine, date, age, sep=' - ')
-                msgStr = name + " - " + vaccine + " - " + date
-                alert(msgStr)
+        centers = json["centers"]
 
-    dateToday = datetime.datetime.now()
-    dateStr = str(dateToday.day) + '-' + str(dateToday.month) + '-' + str(dateToday.year)  
-    response = requests.get(api_endpoint_kundapur + dateStr)
-    json = response.json()
-    
-
-    centers = json["centers"]
-
-    for center in centers:
-        sessions = center["sessions"]
-        name = center["name"]
-        for session in sessions:
-            if session["available_capacity"] != 0:
-                vaccine = session["vaccine"]
-                date = session["date"]
-                age = session["min_age_limit"]
-                print(name, vaccine, date, age, sep=' - ')
-                msgStr = name + " - " + vaccine + " - " + date
-                alert(msgStr)
+        for center in centers:
+            sessions = center["sessions"]
+            name = center["name"]
+            for session in sessions:
+                if session["available_capacity"] != 0:
+                    vaccine = session["vaccine"]
+                    date = session["date"]
+                    age = session["min_age_limit"]
+                    print(name, vaccine, date, age, sep=' - ')
+                    msgStr = name + " - " + vaccine + " - " + date
+                    alert(msgStr)
 
 
 
