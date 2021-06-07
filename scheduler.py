@@ -7,6 +7,10 @@ api_endpoint_manipal = 'https://cdn-api.co-vin.in/api/v2/appointment/sessions/pu
 api_endpoint_kundapur = 'https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByPin?pincode=576201&date=';
 gmailaddress = "rohan.kumar.smtp@gmail.com"
 gmailpassword = "Maryhadalittlelamb"
+proxies = {
+ "http": "http://49.248.152.247:80",
+ "https": "http://14.140.131.82:3128",
+}
 
 def alert(vaccineInfo):
     # print(vaccineInfo)
@@ -20,7 +24,7 @@ def alert(vaccineInfo):
 def cronjob():
     dateToday = datetime.datetime.now()
     dateStr = str(dateToday.day) + '-' + str(dateToday.month) + '-' + str(dateToday.year)  
-    response = requests.get(api_endpoint_manipal + dateStr)
+    response = requests.get(api_endpoint_manipal + dateStr, proxies=proxies)
     json = response.json()
     print(json)
     if json:
